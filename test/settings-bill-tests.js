@@ -111,7 +111,6 @@ describe('Settings Bill Function ', () => {
     assert.equal(settingsInstance.getCriticalLevel(), 20);
     assert.equal(settingsInstance.getGrandTotal(), 47);
     assert.equal(settingsInstance.getColor(), "danger");
-    // assert.equal(settingsInstance.getGrandTotal(), 28);
     assert.deepEqual(settingsInstance.hasReachedCriticalLevel(), true);
   })
 })

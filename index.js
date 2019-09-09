@@ -29,11 +29,19 @@ app.get('/', (req, res) => {
 }) 
 
 app.post('/settings', (req, res) => {
+    let callCost = req.body.callCost,
+        smsCost = req.body.smsCost,
+        warningLevel = req.body.warningLevel,
+        criticalLevel = req.body.criticalLevel;
+
+    if(callCost === "" || smsCost === "" || warningLevel === "" || criticalLevel === "") {
+        return;
+    }
     settingsBill.setSettings({
-        callCost: req.body.callCost,
-        smsCost: req.body.smsCost,
-        warningLevel: req.body.warningLevel,
-        criticalLevel: req.body.criticalLevel
+        callCost: callCost,
+        smsCost: smsCost,
+        warningLevel: warningLevel,
+        criticalLevel: criticalLevel
     })   
     settingsBill.updateText();
     res.redirect('/')
