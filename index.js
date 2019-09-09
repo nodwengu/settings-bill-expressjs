@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
+
     res.render('index', {
         setting: settingsBill.getSettings(),
         totals: settingsBill.getTotals(),
@@ -48,6 +49,9 @@ app.post('/settings', (req, res) => {
 })
 
 app.post('/action', (req, res) => {
+    if(req.body.actionType === undefined && req.body.actionType !== 'call' && req.body.actionType !== 'sms') {
+        return
+    }
     settingsBill.setAction(req.body.actionType);
 
     settingsBill.updateText();
@@ -62,7 +66,7 @@ app.get('/actions', (req, res) => {
 })
 
 app.get('/actions/:actionType', (req, res) => {
-    const actionType = req.params.actionType;
+    const actionType = req.params.actionType
     res.render('actions', {
         actions: settingsBill.getActionsFor(actionType)
     });
